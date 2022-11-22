@@ -84,6 +84,12 @@ public function AgentsRegistration(){
 return view('admin.users.CreateAgents');
 
 }
+//Create Admin
+public function AdminRegistration(){
+
+    return view('admin.users.CreateAdmins');
+    
+    }
 //Transfer Money
 public function transferMoney(){
     return view('pages.TransferMoney');

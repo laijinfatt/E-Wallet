@@ -21,7 +21,7 @@ $today = $year . '-' . $month . '-' . $day;
                         @endif
             <br>
             <div class="column" style=" float: left; width: 20%;">
-             <h5>Create Agents</h5>
+             <h5>Create Admins</h5>
                  <form method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
 
@@ -41,7 +41,7 @@ $today = $year . '-' . $month . '-' . $day;
                                   @endif
                     </div>
 
-                    <input type="hidden" class="form-control" id="account_level" name="account_level" value="3" min="3" required autofocus>
+                    <input type="hidden" class="form-control" id="account_level" name="account_level" value="1" min="1" required autofocus>
 
                     <!-- <div class="form-group">
                         <label for="account_level">Account Level:</label><br>

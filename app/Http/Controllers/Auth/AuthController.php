@@ -39,6 +39,12 @@ class AuthController extends Controller
             if(Auth::user()->isAdmin()){
                 return redirect()->route('admin.dashboard');
             }
+            else if(Auth::user()->isBranch()){
+                return redirect()->route('branch.dashboard');
+            }
+            else if(Auth::user()->isAgent()){
+                return redirect()->route('agent.dashboard');
+            }
         }
 
         return redirect('admin/dashboard');
@@ -75,6 +81,14 @@ class AuthController extends Controller
         {
             return redirect()->route('view.branch')->withSuccess('You have successfully created a new branch!');
         }
+        else if($request->account_level == 3)
+        {
+            return redirect()->route('view.agents')->withSuccess('You have successfully created a new agent!');
+        }
+        else if($request->account_level == 4)
+        {
+            return redirect()->route('view.member')->withSuccess('You have successfully created a new member!');
+        }
         else
         {
             return back()->withError('Incorrect input. Please try again.');
@@ -97,6 +111,16 @@ class AuthController extends Controller
         }
 
         return redirect('login')->withSuccess('You do not have access to this page!');
+    }
+
+    public function branchDashboard()
+    {
+        return view('branch.dashboard');
+    }
+
+    public function agentDashboard()
+    {
+        return view('agent.dashboard');
     }
     
     public function create(array $data){
