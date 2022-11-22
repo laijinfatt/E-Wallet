@@ -18,12 +18,12 @@ class IsSubadmin
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, $guard = null)
-    {
-        if (Auth::guard($guard)->user()->can(UserPolicy::SUBADMIN, User::class)) {
-            return $next($request);
-        }
+    // public function handle(Request $request, Closure $next, $guard = null)
+    // {
+    //     if (Auth::guard($guard)->user()->can(UserPolicy::SUBADMIN, User::class)) {
+    //         return $next($request);
+    //     }
 
-        throw new HttpException(403, 'Forbidden');
-    }
+    //     throw new HttpException(403, 'Forbidden');
+    // }
 }

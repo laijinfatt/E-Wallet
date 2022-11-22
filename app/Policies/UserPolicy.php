@@ -35,8 +35,8 @@ class UserPolicy
         return $user->isBranch();
     }
 
-    public function subadmin(User $user): bool
-    {
-        return $user->isSubadmin();
-    }
+    // public function subadmin(User $user): bool
+    // {
+    //     return $user->isSubadmin();
+    // }
 }

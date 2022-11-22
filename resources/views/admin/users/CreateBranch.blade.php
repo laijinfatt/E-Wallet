@@ -22,7 +22,7 @@ $today = $year . '-' . $month . '-' . $day;
             <br>
             <div class="column" style=" float: left; width: 20%;">
              <h5>Create Branch</h5>
-                 <form method="POST" action="{{ route('register.branch.post') }}">
+                 <form method="POST" action="{{ route('register') }}">
                     {{ csrf_field() }}
 
                     <div class="form-group">
@@ -33,6 +33,8 @@ $today = $year . '-' . $month . '-' . $day;
                                   @endif
                     </div>
 
+                    <input type="hidden" class="form-control" id="account_level" name="account_level"  value="2" min="2" required autofocus>
+
                     <div class="form-group">
                         <label for="account_name">Account Name:</label>
                         <input type="text" class="form-control" placeholder="Account Name" id="account_name" name="account_name"  required autofocus>
@@ -41,7 +43,7 @@ $today = $year . '-' . $month . '-' . $day;
                                   @endif
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="account_level">Account Level:</label><br>
                         <select id="account_level" name="account_level" style="width:100%;height:28px;border:white 1px solid;;box-shadow:#d0d6dc 0.5px 0.5px 0.5px 2px;font-size:15px;">
                             <option value="subAdmin">Sub-admin</option>
@@ -50,7 +52,7 @@ $today = $year . '-' . $month . '-' . $day;
                         @if ($errors->has('account_level'))
                                       <span class="text-danger">{{ $errors->first('account_level') }}</span>
                                   @endif
-                    </div>
+                    </div> -->
 
                     <div class="form-group">
                         <label for="join_date">Join Date:</label>
@@ -145,13 +147,15 @@ $today = $year . '-' . $month . '-' . $day;
                                     @endif
                                 </div>
                     
-                    <div class="form-group" >
+                    <!-- <div class="form-group" >
                         <label for="created_by">Created By:</label>
                         <input type="text" class="form-control" placeholder="Your Name" id="created_by" name="created_by"  required autofocus>
                         @if ($errors->has('created_by'))
                                       <span class="text-danger">{{ $errors->first('created_by') }}</span>
                                   @endif
-                    </div>
+                    </div> -->
+
+                    <input type="hidden" class="form-control" id="created_by" name="created_by"  value="{{auth()->user()->name}}" required autofocus>
 
                     <div class="form-group" style="text-align:center;"><br>
                         <button  type="submit" class="btn btn-primary" style="width:100%;">Submit</button>

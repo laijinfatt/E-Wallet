@@ -12,10 +12,10 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    const DEFAULT = 5;
-    const AGENT = 4;
-    const BRANCH = 3;
-    const SUBADMIN = 2;
+    const DEFAULT = 4;
+    const AGENT = 3;
+    const BRANCH = 2;
+    //const SUBADMIN = 2;
     const ADMIN = 1;
 
     /**
@@ -41,7 +41,6 @@ class User extends Authenticatable
         'password',
         'credit_limit',
         'join_date',
-        'type',
         'created_by',
         'deleted_by',
     ];
@@ -65,34 +64,34 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     
-    public function type()
+    public function accLevel()
     {
-        return (int) $this->type;
+        return (int) $this->account_level;
     }
 
     public function isAdmin(): bool
     {
-        return $this->type() === self::ADMIN;
+        return $this->accLevel() === self::ADMIN;
     }
 
     public function isAgent(): bool
     {
-        return $this->type() === self::AGENT;
+        return $this->accLevel() === self::AGENT;
     }
 
     public function isMember(): bool
     {
-        return $this->type() === self::DEFAULT;
+        return $this->accLevel() === self::DEFAULT;
     }
 
-    public function isSubadmin(): bool
-    {
-        return $this->type() === self::SUBADMIN;
-    }
+    // public function isSubadmin(): bool
+    // {
+    //     return $this->accLevel() === self::SUBADMIN;
+    // }
 
     public function isBranch(): bool
     {
-        return $this->type() === self::BRANCH;
+        return $this->accLevel() === self::BRANCH;
     }
 
 }
