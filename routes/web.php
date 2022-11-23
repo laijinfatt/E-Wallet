@@ -32,8 +32,8 @@ Route::get('admin/logout', [AdminController::class, 'logout']);
 Route::get('login', [AuthController::class, 'index'])->name('login');
 Route::post('post-login', [AuthController::class, 'postLogin'])->name('login.post'); 
 Route::post('post-registration', [AuthController::class, 'postRegistration'])->name('register');
-Route::post('post-register-branches',[AdminController::class, 'postRegisterBranches'])->name('register.branch.post');
-Route::post('post-register-agents',[AdminController::class, 'postRegisterAgents'])->name('register.agent.post');
+// Route::post('post-register-branches',[AdminController::class, 'postRegisterBranches'])->name('register.branch.post');
+// Route::post('post-register-agents',[AdminController::class, 'postRegisterAgents'])->name('register.agent.post');
 
 
 //Route for editing and updating users' information
