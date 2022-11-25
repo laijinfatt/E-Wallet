@@ -31,13 +31,8 @@ class User extends Authenticatable
         'name',
         'username',
         'email',
-        'handphone_number',
-        'ic',
         'base_currency',
         'credit_available',
-        'address',
-        'remark',
-        'status',
         'password',
         'credit_limit',
         'join_date',
@@ -63,6 +58,11 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function id(): int
+    {
+        return $this->id;
+    }
     
     public function accLevel()
     {
@@ -92,6 +92,11 @@ class User extends Authenticatable
     public function isBranch(): bool
     {
         return $this->accLevel() === self::BRANCH;
+    }
+
+    public function permission()
+    {
+        return $this->hasMany('App\Models\Permission');
     }
 
 }

@@ -46,12 +46,11 @@ class AuthController extends Controller
                 return redirect()->route('agent.dashboard');
             }
             else{
-                return redirect()->route('');
+                return redirect()->route('home');
             }
         }
 
-        return redirect('admin/dashboard');
-        //return redirect('login')->with('error', 'Username or password is incorrect. Please try again.');
+        return redirect('login')->with('error', 'Username or password is incorrect. Please try again.');
 
     }
 
@@ -68,19 +67,67 @@ class AuthController extends Controller
             'email' => 'required',
             'join_date' => 'required',
             'base_currency' => 'nullable',
-            'handphone_number' => 'nullable',
             'credit_limit' => 'required',
             'credit_available' => 'required',
-            'ic' => 'nullable',
             'created_by' => 'required',
+            // 'can_deposit' => 'nullable',
+            // 'can_withdraw' => 'nullable',
+            // 'can_transfer' => 'nullable',
         ]);
         // generate account id automatically
         $request['account_id'] = $this->generateAccID(12);
 
-        $data = $request->all();
+        // $user = new User;
+        // $user -> name = $request -> name;
+        // $user -> account_name = $request -> account_name;
+        // $user -> account_id = $request -> account_id;
+        // $user -> account_level = $request -> account_level;
+        // $user -> username = $request -> username;
+        // $user -> password = \Hash::make($request -> password);
+        // $user -> email = $request -> email;
+        // $user -> join_date = $request -> join_date;
+        // $user -> base_currency = $request -> base_currency;
+        // $user -> credit_limit = $request -> credit_limit;
+        // $user -> credit_available = $request -> credit_available;
+        // $user -> created_by = $request -> created_by;
+        // $user -> permission = json_encode($request -> permission);
+        // $user -> save();
+        $data = $request->only('name','account_name','account_id','account_level','username','password','email','join_date','base_currency'
+        ,'credit_limit','credit_available','created_by');
         $check = $this->create($data);
 
-        if($request->account_level == 2)
+        //check if user is created
+        if($check)
+        {
+            // assign user to get its id
+            $user = DB::table('users')->select('users.id')->where('users.account_id',$request->account_id)->first()->id;
+
+            // check for each permission is checked on checkbox
+            if($request->can_deposit)
+            {
+                $data = array('user_id' => $user,'permission_id' => 1);
+                DB::table('user_permissions')->insert($data);
+            }
+            if($request->can_withdraw)
+            {
+                $data = array('user_id' => $user,'permission_id' => 2);
+                DB::table('user_permissions')->insert($data);
+            }
+            if($request->can_transfer)
+            {
+                $data = array('user_id' => $user,'permission_id' => 3);
+                DB::table('user_permissions')->insert($data);
+            }
+        }
+
+        //$users = User::all()->where('name',$request->name);
+        // insert create wallet code or method here
+
+        if($request->account_level == 1)
+        {
+            return redirect()->route('view.admin')->withSuccess('You have successfully created a sub-admin!');
+        }
+        else if($request->account_level == 2)
         {
             return redirect()->route('view.branch')->withSuccess('You have successfully created a new branch!');
         }
@@ -138,10 +185,8 @@ class AuthController extends Controller
             'email' => $data['email'],
             'join_date' => $data['join_date'],
             'base_currency' => $data['base_currency'],
-            'handphone_number' => $data['handphone_number'],
             'credit_limit' => $data['credit_limit'],
             'credit_available' => $data['credit_available'],
-            'ic' => $data['ic'],
             'created_by' => $data['created_by'],
         ]);
     }
@@ -229,4 +274,14 @@ class AuthController extends Controller
 
         return redirect('login');
     }
+
+    public function home(){
+        return view('home');
+    }
+
+    public function showBranch(){
+        $users = DB::table('users')->select('users.*')->where('account_level','2')->orderBy('id','desc')->get();
+        return view("admin.users.viewBranch")->with(["users" => $users]);
+    }
+
 }

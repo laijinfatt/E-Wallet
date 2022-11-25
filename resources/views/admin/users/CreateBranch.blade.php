@@ -97,14 +97,14 @@ $today = $year . '-' . $month . '-' . $day;
                                   @endif
                     </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                         <label for="contactNumber">Contact Number:</label>
                         <input type="tel" class="form-control" placeholder="Contact Number" id="handphone_number" name="handphone_number" 
                         pattern="[0-9]{3}-[0-9]{7}|[0-9]{3}-[0-9]{8}" required autofocus>
                         @if ($errors->has('handphone_number'))
                                       <span class="text-danger">{{ $errors->first('handphone_number') }}</span>
                        @endif
-                    </div>  
+                    </div>   -->
 
                     <div class="form-group">
                         <label for="credit_limit">Credit Limit:</label>
@@ -126,11 +126,11 @@ $today = $year . '-' . $month . '-' . $day;
                                   @endif
                     </div>
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="ic">IC No.:</label>
                         <input type="text" class="form-control" placeholder="IC eg. 991114-07-7777" id="ic" name="ic"
                         pattern="[0-9]{6}-[0-9]{2}-[0-9]{4}"  required autofocus>
-                    </div>  
+                    </div>   -->
                     
                     <div class="form-group" >
                         <label for="password">*Password:</label>
@@ -156,6 +156,10 @@ $today = $year . '-' . $month . '-' . $day;
                     </div> -->
 
                     <input type="hidden" class="form-control" id="created_by" name="created_by"  value="{{auth()->user()->name}}" required autofocus>
+                    <br><br>
+                    <input type="checkbox" name="can_deposit" id="can_deposit" value="1"> <label for="can_deposit">Can Deposit</label><br>
+                    <input type="checkbox" name="can_withdraw" id="can_withdraw" value="2"> <label for="can_withdraw">Can Withdraw</label><br>
+                    <input type="checkbox" name="can_transfer" id="can_transfer" value="3"> <label for="can_transfer">Can Transfer</label><br>
 
                     <div class="form-group" style="text-align:center;"><br>
                         <button  type="submit" class="btn btn-primary" style="width:100%;">Submit</button>

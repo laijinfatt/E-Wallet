@@ -28,6 +28,7 @@
                             
             </thead>
             <tbody>
+                @foreach($users as $agents)
                 <tr>
                     <td></td>
                     <td></td>

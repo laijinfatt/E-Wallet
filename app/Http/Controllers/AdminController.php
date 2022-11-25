@@ -104,21 +104,24 @@ public function transactionHistory(){
     return view('pages.transactionHistory');
 }
 //Home
-public function home(){
-    return view('home');
-}
+// public function home(){
+//     return view('home');
+// }
 
 //ViewMember
 public function viewMember(){
-    return view('admin.users.viewMembers');
+    $users = DB::table('users')->select('users.*')->where('account_level','4')->orderBy('id','desc')->get();
+    return view("admin.users.viewBranch")->with(["users" => $users]);
 }
 //ViewBranch 
 public function viewBranch(){
-    return view('admin.users.viewBranch');
+    $users = DB::table('users')->select('users.*')->where('account_level','2')->orderBy('id','desc')->get();
+    return view("admin.users.viewBranch")->with(["users" => $users]);
 }
 //ViewAgents 
 public function viewAgents(){
-    return view('admin.users.viewAgents');
+    $users = DB::table('users')->select('users.*')->where('account_level','3')->orderBy('id','desc')->get();
+    return view("admin.users.viewBranch")->with(["users" => $users]);
 }
 
 //postRegisterBranches

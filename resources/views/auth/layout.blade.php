@@ -19,11 +19,11 @@
        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
         <link href="{{ asset('css/refresh.css') }}" rel="stylesheet">
-        @if(!Session::has('adminData'))
-            <!-- <script type="text/javascript">
+        <!-- @if(!Session::has('adminData'))
+            <script type="text/javascript">
                 window.location.href="{{url('admin/login')}}"
-            </script> -->
-        @endif   
+            </script> 
+        @endif    -->
         <style type="text/css">
            @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
   
@@ -153,14 +153,14 @@
        
                 <a class="navbar-brand" href="{{ route('dashboard')}}" style="color:white;display:inline;">E-wallet</a>
             <!--Login & Logout-->
-            <div style="float:right;margin-right:25px;"> 
+            <!-- <div style="float:right;margin-right:25px;"> 
                 @guest
                    <a class="nav-link" href="{{ route('login') }}" style="color:white;"><i class="fas fa-sign-in-alt"></i></a>
                 @else
                 <a class="nav-link" href="{{ route('logout') }}" style="color:white;"><i class="fa fa-solid fa fa-right-to-bracket"></i></a>
                    
                 @endguest
-                </div>
+                </div> -->
         </nav> 
     <!-- TopNav second 
         <nav class="navbar navbar-expand-lg navbar-laravel" style="max-width : 10000px; background-image:linear-gradient(to right,#ff914d,#ff9b4f);overflow-x:scroll;">
